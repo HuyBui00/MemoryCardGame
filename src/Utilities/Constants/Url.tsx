@@ -1,4 +1,4 @@
 export const Url = {
-  TrangMenu: "/trang-menu",
-  Map1: "/Map-1",
+  TrangMenu: "/MemoryCardGame/trang-menu",
+  Map1: "/MemoryCardGame/Map-1",
 };

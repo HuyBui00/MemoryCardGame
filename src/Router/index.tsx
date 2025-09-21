@@ -4,7 +4,7 @@ import TrangMenu from "../Page/TrangDungChung/TrangMenu";
 import { Url } from "../Utilities/Constants/Url";
 export const publicRouter = [
   { path: Url.TrangMenu, component: TrangMenu },
-  { path: "/trang-chon-game", component: TrangChonGame },
+  { path: "/MemoryCardGame/trang-chon-game", component: TrangChonGame },
   { path: Url.Map1, component: Man1 },
 ];
 
