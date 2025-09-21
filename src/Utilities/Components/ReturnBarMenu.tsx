@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { Url } from "../Constants/Url";
+import { Url } from "../../Router/Url";
 import ModalConfirm from "./ModalConfirm";
 
 const ReturnBarMenu = () => {
@@ -13,7 +13,7 @@ const ReturnBarMenu = () => {
 
   const handleConfirm = () => {
     setShowModal(false);
-    navigate(Url.TrangMenu);
+    navigate(Url.ChonManChoi);
   };
 
   const handleCancel = () => {

@@ -1,13 +1,13 @@
 import { useNavigate } from "react-router-dom";
 import { useI18nText } from "../../Utilities/Constants/i18nText";
-import { Url } from "../../Utilities/Constants/Url";
+import { Url } from "../../Router/Url";
 
 export default function TrangMenu() {
   const i18n_Text = useI18nText();
 
   const navigate = useNavigate();
 
-  const handleStart = () => navigate(Url.Map1);
+  const handleStart = () => navigate(Url.ChonManChoi);
   const handleOptions = () => navigate("/trang-chon-game");
   const handleExit = () => navigate("/trang-chon-game");
 

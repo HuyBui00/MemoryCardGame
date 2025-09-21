@@ -13,6 +13,9 @@ export const translationCodetable = [
   { key: "choose_language", en: "Choose language", vi: "Chọn ngôn ngữ" },
   { key: "en", en: "English", vi: "Tiếng Anh" },
   { key: "vi", en: "Vietnamese", vi: "Tiếng Việt" },
+  { key: "chooseLevel", en: "Select level", vi: "Chọn màn chơi" },
+  { key: "level", en: "Level", vi: "Màn chơi" },
+  { key: "gameExit", en: "Exit", vi: "Thoát game" },
 ];
 
 export const i18n_vi = translationCodetable.reduce((acc, item) => {

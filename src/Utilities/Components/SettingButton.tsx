@@ -1,26 +1,70 @@
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useI18nText } from "../Constants/i18nText";
+import { useLocation, useNavigate } from "react-router-dom";
+import { Url } from "../../Router/Url";
 
 const SettingButton = () => {
   const { i18n } = useTranslation();
+  const navigate = useNavigate();
+  const location = useLocation();
+
+  // ví dụ bạn muốn kiểm tra nếu url kết thúc bằng "/map1"
+  const isTrangChonGame = location.pathname.endsWith("/ChonManChoi");
   const changeLanguage = (lng: string) => {
     i18n.changeLanguage(lng);
+    setShow(false);
+    setOpen(false);
   };
   const [show, setShow] = useState(false);
+  const [open, setOpen] = useState(false);
 
   const i18n_Text = useI18nText();
 
   return (
     <div>
-      {/* Button Setting */}
-      <button
-        className="btn btn-secondary position-fixed rounded-circle d-flex align-items-center justify-content-center"
-        style={{ top: "10px", right: "10px", width: "45px", height: "45px" }}
-        onClick={() => setShow(true)}
+      <div
+        className="position-fixed"
+        style={{ top: "10px", right: "10px", zIndex: 9999 }}
       >
-        <i className="bi bi-gear-fill"></i>
-      </button>
+        <div className="position-relative">
+          {/* Nút menu chính (giữ nguyên chỗ) */}
+          <button
+            className="btn btn-secondary rounded-circle d-flex align-items-center justify-content-center"
+            style={{ width: "45px", height: "45px" }}
+            onClick={() => setOpen((prev) => !prev)}
+          >
+            ☰
+          </button>
+
+          {/* Nút con xổ xuống dưới */}
+          {open && (
+            <div
+              className="position-absolute d-flex flex-column"
+              style={{ top: "55px", right: "0" }}
+            >
+              <button
+                className="btn btn-primary mb-2"
+                style={{ minWidth: 150 }}
+                onClick={() => setShow(true)}
+              >
+                {i18n_Text.choose_language}
+              </button>
+              {!isTrangChonGame && (
+                <button
+                  className="btn btn-danger"
+                  onClick={() => {
+                    navigate(Url.ChonManChoi);
+                    setOpen(false);
+                  }}
+                >
+                  {i18n_Text.gameExit}
+                </button>
+              )}
+            </div>
+          )}
+        </div>
+      </div>
 
       {/* Modal bootstrap cơ bản */}
       {show && (

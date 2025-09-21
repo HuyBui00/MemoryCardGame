@@ -1,5 +1,4 @@
 import { useState, useEffect } from "react";
-import ReturnBarMenu from "../../Utilities/Components/ReturnBarMenu";
 
 const generateCards = () => {
   const icons = ["🍎", "🍌", "🍇", "🍓", "🍍", "🥝", "🍑", "🍉"];
@@ -78,7 +77,6 @@ export default function TrangChonGame() {
   return (
     <div className="container text-center mt-4">
       <h2 className="mb-3">🎮 Trò chơi Lật Thẻ</h2>
-      <ReturnBarMenu />
 
       <div className="mb-3">
         <span className="badge bg-info fs-6 me-2">Số lượt: {moves}</span>

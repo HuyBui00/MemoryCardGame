@@ -1,5 +1,4 @@
 import { useState, useEffect } from "react";
-import ReturnBarMenu from "../../Utilities/Components/ReturnBarMenu";
 
 const generateCards = () => {
   // const icons = ["🍎", "🍌", "🍇", "🍓", "🍍", "🥝", "🍑", "🍉"]; // 8 cặp
@@ -63,8 +62,6 @@ export default function Man1() {
   return (
     <div className="container text-center mt-4">
       <h2>Màn 1</h2>
-      <ReturnBarMenu />
-
       <div
         className="d-grid gap-2"
         style={{
