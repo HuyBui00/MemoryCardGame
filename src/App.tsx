@@ -1,7 +1,6 @@
-import { Routes, Route, Navigate } from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
 import { publicRouter } from "./Router";
 import "./i18n";
-import { Url } from "./Utilities/Constants/Url";
 import SettingButton from "./Utilities/Components/SettingButton";
 
 function App() {
@@ -9,8 +8,6 @@ function App() {
     <div>
       <SettingButton />
       <Routes>
-        <Route path="/" element={<Navigate to={Url.Map1} replace />} />
-
         {publicRouter.map((route, index) => {
           const Pages = route.component;
           return <Route key={index} path={route.path} element={<Pages />} />;
