@@ -68,7 +68,7 @@ export default function Man3() {
 
       setTimeout(() => setFlippedCards([]), 1000);
     }
-  }, [flippedCards]);
+  }, [flippedCards, cards]);
 
   useEffect(() => {
     if (cards.every((c) => c.matched)) {
