@@ -15,16 +15,14 @@ const generateCards = () => {
   return cards;
 };
 
-export default function Man1() {
+export default function Man3() {
   const [cards, setCards] = useState(generateCards());
   const [flippedCards, setFlippedCards] = useState<number[]>([]);
   const [win, setWin] = useState(false);
   const [moves, setMoves] = useState(0);
   const { speakFruit, speakWrong } = useSound();
-
   const speakRef = useRef({ speakFruit, speakWrong });
 
-  // keep ref updated when functions change
   useEffect(() => {
     speakRef.current = { speakFruit, speakWrong };
   }, [speakFruit, speakWrong]);
@@ -41,33 +39,33 @@ export default function Man1() {
     if (flippedCards.length === 2) {
       setMoves((prev) => prev + 1);
       const [first, second] = flippedCards;
-      setCards((prevCards) => {
-        const firstCard = prevCards.find((c) => c.id === first);
-        const secondCard = prevCards.find((c) => c.id === second);
+      const firstCard = cards.find((c) => c.id === first);
+      const secondCard = cards.find((c) => c.id === second);
 
-        if (firstCard && secondCard && firstCard.icon === secondCard.icon) {
-          speakRef.current.speakFruit(firstCard.icon);
-          // ✅ giống nhau → matched
-          return prevCards.map((card) =>
+      if (firstCard && secondCard && firstCard.icon === secondCard.icon) {
+        // ✅ đúng
+        speakRef.current.speakFruit(firstCard.icon);
+        setCards((prev) =>
+          prev.map((card) =>
             card.id === first || card.id === second
               ? { ...card, matched: true }
               : card
+          )
+        );
+      } else {
+        // ❌ sai
+        speakRef.current.speakWrong();
+        setTimeout(() => {
+          setCards((prev) =>
+            prev.map((card) =>
+              card.id === first || card.id === second
+                ? { ...card, flipped: false }
+                : card
+            )
           );
-        } else {
-          speakRef.current.speakWrong();
-          // ❌ khác nhau → úp lại sau 1s
-          setTimeout(() => {
-            setCards((prev) =>
-              prev.map((card) =>
-                card.id === first || card.id === second
-                  ? { ...card, flipped: false }
-                  : card
-              )
-            );
-          }, 1000);
-          return prevCards;
-        }
-      });
+        }, 1000);
+      }
+
       setTimeout(() => setFlippedCards([]), 1000);
     }
   }, [flippedCards]);
