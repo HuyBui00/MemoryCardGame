@@ -29,12 +29,12 @@ const ChonManChoi: React.FC = () => {
     <div style={styles.container}>
       {/* Khung bảng đá */}
       <div style={styles.board}>
-        <h3 style={styles.levelTitle}>{i18nText.chooseLevel} </h3>
+        <h3 style={styles.levelTitle}>{i18nText.chooseLevel}</h3>
         <div style={styles.grid}>
           {baiHocList.map((bai) => (
             <button
               key={bai.id}
-              style={styles.lessonBtn}
+              className="lesson-btn"
               onClick={() => handleSelect(bai)}
             >
               {bai.name}
@@ -43,16 +43,63 @@ const ChonManChoi: React.FC = () => {
         </div>
       </div>
 
-      <button style={styles.backBtn} onClick={handleBack}>
-        Menu
+      <button className="back-btn" onClick={handleBack}>
+        ⬅ Menu
       </button>
+
+      {/* CSS riêng cho hiệu ứng */}
+      <style>{`
+        .lesson-btn {
+          background-color: #222;
+          border: 2px solid #ffcc00;
+          border-radius: 8px;
+          padding: 12px 20px;
+          color: #fff;
+          font-size: 18px;
+          cursor: pointer;
+          transition: all 0.3s ease;
+        }
+        .lesson-btn:hover {
+          transform: scale(1.1);
+          background: linear-gradient(45deg, #ffcc00, #ffaa00);
+          box-shadow: 0 0 15px rgba(255, 200, 0, 0.8);
+          color: #000;
+        }
+        .lesson-btn:active {
+          transform: scale(0.9);
+          box-shadow: 0 0 8px rgba(255, 180, 0, 0.6) inset;
+        }
+
+        .back-btn {
+          margin-top: 35px;
+          padding: 12px 28px;
+          background-color: #ffcc00;
+          border: none;
+          border-radius: 8px;
+          color: #000;
+          font-size: 20px;
+          font-weight: bold;
+          cursor: pointer;
+          transition: all 0.3s ease;
+          box-shadow: 0 0 10px rgba(255, 215, 0, 0.6);
+        }
+        .back-btn:hover {
+          transform: scale(1.05);
+          background: linear-gradient(45deg, #ffcc00, #ffaa00);
+          box-shadow: 0 0 15px rgba(255, 200, 0, 0.8);
+        }
+        .back-btn:active {
+          transform: scale(0.9);
+          box-shadow: 0 0 8px rgba(255, 180, 0, 0.6) inset;
+        }
+      `}</style>
     </div>
   );
 };
 
 export default ChonManChoi;
 
-// ================= CSS =================
+// ================= CSS JS Object cho layout =================
 const styles: { [key: string]: React.CSSProperties } = {
   container: {
     position: "relative",
@@ -63,43 +110,29 @@ const styles: { [key: string]: React.CSSProperties } = {
     flexDirection: "column",
     alignItems: "center",
     justifyContent: "center",
+    fontFamily: "'Press Start 2P', cursive",
   },
   board: {
-    backgroundColor: "rgba(30, 30, 30, 0.9)",
-    border: "5px solid #444",
-    borderRadius: "12px",
-    padding: "20px 40px",
+    backgroundColor: "rgba(20, 20, 20, 0.85)",
+    border: "5px solid #666",
+    borderRadius: "15px",
+    padding: "30px 50px",
     textAlign: "center",
     color: "white",
-    minWidth: "300px",
+    minWidth: "340px",
+    boxShadow: "0 0 20px rgba(255, 215, 0, 0.3)",
   },
   levelTitle: {
-    marginBottom: "20px",
-    fontSize: "22px",
+    marginBottom: "25px",
+    fontSize: "26px",
     fontWeight: "bold",
     color: "#ffcc00",
+    textShadow: "2px 2px 8px rgba(0,0,0,0.8)",
   },
   grid: {
     display: "grid",
     gridTemplateColumns: "1fr 1fr",
-    gap: "10px 40px",
+    gap: "20px 50px",
     justifyItems: "center",
-  },
-  lessonBtn: {
-    backgroundColor: "transparent",
-    border: "none",
-    color: "white",
-    fontSize: "18px",
-    cursor: "pointer",
-    transition: "color 0.2s",
-  },
-  backBtn: {
-    marginTop: "30px",
-    background: "none",
-    border: "none",
-    color: "#ffcc00",
-    fontSize: "22px",
-    fontWeight: "bold",
-    cursor: "pointer",
   },
 };
