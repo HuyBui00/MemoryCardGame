@@ -9,6 +9,9 @@ const SettingButton = () => {
   const navigate = useNavigate();
   const location = useLocation();
 
+  const isHomePage =
+    location.pathname === "/MemoryCardGame/" ||
+    location.pathname === "/MemoryCardGame";
   // ví dụ bạn muốn kiểm tra nếu url kết thúc bằng "/map1"
   const isTrangChonGame = location.pathname.endsWith("/ChonManChoi");
   const changeLanguage = (lng: string) => {
@@ -23,48 +26,50 @@ const SettingButton = () => {
 
   return (
     <div>
-      <div
-        className="position-fixed"
-        style={{ top: "10px", right: "10px", zIndex: 9999 }}
-      >
-        <div className="position-relative">
-          {/* Nút menu chính (giữ nguyên chỗ) */}
-          <button
-            className="btn btn-secondary rounded-circle d-flex align-items-center justify-content-center"
-            style={{ width: "45px", height: "45px" }}
-            onClick={() => setOpen((prev) => !prev)}
-          >
-            ☰
-          </button>
-
-          {/* Nút con xổ xuống dưới */}
-          {open && (
-            <div
-              className="position-absolute d-flex flex-column"
-              style={{ top: "55px", right: "0" }}
+      {!isHomePage && (
+        <div
+          className="position-fixed"
+          style={{ top: "10px", right: "10px", zIndex: 9999 }}
+        >
+          <div className="position-relative">
+            {/* Nút menu chính (giữ nguyên chỗ) */}
+            <button
+              className="btn btn-secondary rounded-circle d-flex align-items-center justify-content-center"
+              style={{ width: "45px", height: "45px" }}
+              onClick={() => setOpen((prev) => !prev)}
             >
-              <button
-                className="btn btn-primary mb-2"
-                style={{ minWidth: 150 }}
-                onClick={() => setShow(true)}
+              ☰
+            </button>
+
+            {/* Nút con xổ xuống dưới */}
+            {open && (
+              <div
+                className="position-absolute d-flex flex-column"
+                style={{ top: "55px", right: "0" }}
               >
-                {i18n_Text.choose_language}
-              </button>
-              {!isTrangChonGame && (
                 <button
-                  className="btn btn-danger"
-                  onClick={() => {
-                    navigate(Url.ChonManChoi);
-                    setOpen(false);
-                  }}
+                  className="btn btn-primary mb-2"
+                  style={{ minWidth: 150 }}
+                  onClick={() => setShow(true)}
                 >
-                  {i18n_Text.gameExit}
+                  {i18n_Text.choose_language}
                 </button>
-              )}
-            </div>
-          )}
+                {!isTrangChonGame && (
+                  <button
+                    className="btn btn-danger"
+                    onClick={() => {
+                      navigate(Url.ChonManChoi);
+                      setOpen(false);
+                    }}
+                  >
+                    {i18n_Text.gameExit}
+                  </button>
+                )}
+              </div>
+            )}
+          </div>
         </div>
-      </div>
+      )}
 
       {/* Modal bootstrap cơ bản */}
       {show && (

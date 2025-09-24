@@ -4,4 +4,5 @@ export const Url = {
   Map2: "/MemoryCardGame/Map2",
   Map3: "/MemoryCardGame/Map3",
   ChonManChoi: "/MemoryCardGame/ChonManChoi",
+  // MainPage: "/MemoryCardGame/MainPage",
 };
