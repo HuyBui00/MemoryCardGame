@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect } from "react";
 import WinAlert from "../../Utilities/Components/WinAlert";
 import { useSound } from "../../Utilities/Constants/useSound";
 
@@ -20,16 +20,14 @@ export default function Man1() {
   const [flippedCards, setFlippedCards] = useState<number[]>([]);
   const [win, setWin] = useState(false);
   const [moves, setMoves] = useState(0);
-  const { speakFruit, speakWrong } = useSound();
-
-  const speakRef = useRef({ speakFruit, speakWrong });
-
-  // keep ref updated when functions change
-  useEffect(() => {
-    speakRef.current = { speakFruit, speakWrong };
-  }, [speakFruit, speakWrong]);
+  const { speakWrong, playFlip, speakCorrect } = useSound();
 
   const handleFlip = (id: number) => {
+    if (flippedCards.length === 0) {
+      playFlip();
+      // return;
+    }
+
     if (flippedCards.length === 2 || win) return;
     setCards((prev) =>
       prev.map((card) => (card.id === id ? { ...card, flipped: true } : card))
@@ -46,7 +44,7 @@ export default function Man1() {
         const secondCard = prevCards.find((c) => c.id === second);
 
         if (firstCard && secondCard && firstCard.icon === secondCard.icon) {
-          speakRef.current.speakFruit(firstCard.icon);
+          speakCorrect();
           // ✅ giống nhau → matched
           return prevCards.map((card) =>
             card.id === first || card.id === second
@@ -54,7 +52,7 @@ export default function Man1() {
               : card
           );
         } else {
-          speakRef.current.speakWrong();
+          speakWrong();
           // ❌ khác nhau → úp lại sau 1s
           setTimeout(() => {
             setCards((prev) =>
