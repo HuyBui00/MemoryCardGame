@@ -78,5 +78,10 @@ export function useSound() {
     audio.play();
   };
 
-  return { speak, speakFruit, speakWrong, playFlip, speakCorrect };
+  const playMenu = () => {
+    const audio = new Audio("/MemoryCardGame/sound/menuSound.mp3"); // tự động lấy từ public
+    audio.play();
+  };
+
+  return { speak, speakFruit, speakWrong, playFlip, speakCorrect, playMenu };
 }

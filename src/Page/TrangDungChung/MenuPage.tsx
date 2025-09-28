@@ -1,9 +1,15 @@
 import { useNavigate } from "react-router-dom";
 import { Url } from "../../Router/Url";
+import { useSound } from "../../Utilities/Constants/useSound";
+import { useEffect } from "react";
 
 export default function MainPage() {
   const navigate = useNavigate();
+  const { playMenu } = useSound();
 
+  useEffect(() => {
+    playMenu();
+  }, [playMenu]);
   return (
     <div
       className="vh-100 vw-100 d-flex flex-column justify-content-center align-items-center position-relative overflow-hidden no-select"
