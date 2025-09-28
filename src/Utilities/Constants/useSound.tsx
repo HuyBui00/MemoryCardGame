@@ -33,55 +33,71 @@ export function useSound() {
     window.speechSynthesis.speak(utterance);
   };
 
-  const speakFruit = (icon: string) => {
-    switch (icon) {
-      case "🍌":
-        speak("Correct! Banana");
-        break;
-      case "🍎":
-        speak("Correct! Apple");
-        break;
-      case "🍇":
-        speak("Correct! Grapes");
-        break;
-      case "🍓":
-        speak("Correct! Strawberry");
-        break;
-      case "🍍":
-        speak("Correct! Pineapple");
-        break;
-      case "🥝":
-        speak("Correct! Kiwi");
-        break;
-      case "🍑":
-        speak("Correct! Peach");
-        break;
-      case "🍉":
-        speak("Correct! Watermelon");
-        break;
-      default:
-        speak("Correct!");
-        break;
-    }
-  };
-
-  // const playSound = (url: string) => {
-  //   const audio = new Audio(url);
-  //   audio.play().catch((err) => console.warn("Audio play error:", err));
-  // };
+  const audioRef = useRef<HTMLAudioElement | null>(null);
 
   const speakWrong = () => speak("Wrong!");
   const speakCorrect = () => speak("Correct!");
 
   const playFlip = () => {
-    const audio = new Audio("/MemoryCardGame/sound/flip.mp3"); // tự động lấy từ public
-    audio.play();
+    if (audioRef.current) {
+      audioRef.current.pause();
+      audioRef.current.currentTime = 0;
+    }
+    audioRef.current = new Audio("/MemoryCardGame/sound/flip.mp3"); // tự động lấy từ public
+    audioRef.current.play().catch((err) => {
+      console.warn("Audio play interrupted:", err);
+    });
+  };
+
+  const playWinGame = () => {
+    if (audioRef.current) {
+      audioRef.current.pause();
+      audioRef.current.currentTime = 0;
+    }
+    audioRef.current = new Audio("/MemoryCardGame/sound/winGame.mp3"); // tự động lấy từ public
+    audioRef.current.play().catch((err) => {
+      console.warn("Audio play interrupted:", err);
+    });
+  };
+
+  const playSuccessSound = () => {
+    if (audioRef.current) {
+      audioRef.current.pause();
+      audioRef.current.currentTime = 0;
+    }
+    audioRef.current = new Audio("/MemoryCardGame/sound/successSound.mp3"); // tự động lấy từ public
+    audioRef.current.play().catch((err) => {
+      console.warn("Audio play interrupted:", err);
+    });
   };
 
   const playMenu = () => {
-    const audio = new Audio("/MemoryCardGame/sound/menuSound.mp3"); // tự động lấy từ public
-    audio.play();
+    if (audioRef.current) {
+      audioRef.current.pause();
+      audioRef.current.currentTime = 0;
+    }
+    audioRef.current = new Audio("/MemoryCardGame/sound/menuSound.mp3"); // tự động lấy từ public
+    audioRef.current.muted = true; // trick để browser cho phép autoplay
+    audioRef.current.play().then(() => {
+      audioRef.current!.muted = false;
+    });
   };
 
-  return { speak, speakFruit, speakWrong, playFlip, speakCorrect, playMenu };
+  const stopAudio = () => {
+    if (audioRef.current) {
+      audioRef.current.pause();
+      audioRef.current.currentTime = 0;
+    }
+  };
+
+  return {
+    speak,
+    speakWrong,
+    playFlip,
+    speakCorrect,
+    playMenu,
+    stopAudio,
+    playWinGame,
+    playSuccessSound,
+  };
 }

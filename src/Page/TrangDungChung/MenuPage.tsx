@@ -5,11 +5,15 @@ import { useEffect } from "react";
 
 export default function MainPage() {
   const navigate = useNavigate();
-  const { playMenu } = useSound();
+  const { playMenu, stopAudio } = useSound();
 
   useEffect(() => {
     playMenu();
-  }, [playMenu]);
+
+    return () => {
+      stopAudio(); // 🔇 tắt âm thanh khi rời trang hoặc đóng component
+    };
+  }, [playMenu, stopAudio]);
   return (
     <div
       className="vh-100 vw-100 d-flex flex-column justify-content-center align-items-center position-relative overflow-hidden no-select"

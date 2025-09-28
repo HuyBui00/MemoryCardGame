@@ -20,7 +20,7 @@ export default function Man1() {
   const [flippedCards, setFlippedCards] = useState<number[]>([]);
   const [win, setWin] = useState(false);
   const [moves, setMoves] = useState(0);
-  const { playFlip } = useSound();
+  const { playFlip, playSuccessSound } = useSound();
 
   const handleFlip = (id: number) => {
     if (flippedCards.length === 0) {
@@ -44,6 +44,7 @@ export default function Man1() {
         const secondCard = prevCards.find((c) => c.id === second);
 
         if (firstCard && secondCard && firstCard.icon === secondCard.icon) {
+          playSuccessSound();
           // ✅ giống nhau → matched
           return prevCards.map((card) =>
             card.id === first || card.id === second

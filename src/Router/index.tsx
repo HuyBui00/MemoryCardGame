@@ -1,6 +1,5 @@
 import ChonManChoi from "../Page/TrangDungChung/ChonManChoi";
 import Man1 from "../Page/TrangDungChung/Man1";
-import Man3 from "../Page/TrangDungChung/Man3";
 import MainPage from "../Page/TrangDungChung/MenuPage";
 import TrangChonGame from "../Page/TrangDungChung/TrangChonGame";
 // import TrangMenu from "../Page/TrangDungChung/TrangMenu";
@@ -10,7 +9,6 @@ export const publicRouter = [
   { path: "/MemoryCardGame/trang-chon-game", component: TrangChonGame },
   { path: Url.Map2, component: TrangChonGame },
   { path: Url.Map1, component: Man1 },
-  { path: Url.Map3, component: Man3 },
   { path: Url.ChonManChoi, component: ChonManChoi },
   // { path: Url.MainPage, component: MainPage },
 ];

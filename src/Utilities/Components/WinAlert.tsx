@@ -1,5 +1,6 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
+import { useSound } from "../Constants/useSound";
 
 interface WinAlertProps {
   moves: number;
@@ -14,6 +15,21 @@ const WinAlert: React.FC<WinAlertProps> = ({
   show,
   onClose,
 }) => {
+  const hasPlayedRef = React.useRef(false);
+  const { playWinGame, stopAudio } = useSound();
+
+  useEffect(() => {
+    if (show && !hasPlayedRef.current) {
+      playWinGame();
+      hasPlayedRef.current = true;
+    }
+
+    if (!show) {
+      stopAudio();
+      hasPlayedRef.current = false;
+    }
+  }, [show, playWinGame, stopAudio]);
+
   const navigate = useNavigate();
   const location = useLocation();
 
@@ -44,11 +60,6 @@ const WinAlert: React.FC<WinAlertProps> = ({
             <h5 className="modal-title w-100 text-center text-success fw-bold">
               🎉 Bạn đã thắng!
             </h5>
-            <button
-              type="button"
-              className="btn-close"
-              onClick={onClose}
-            ></button>
           </div>
           <div className="modal-body text-center">
             <p className="fs-5">
