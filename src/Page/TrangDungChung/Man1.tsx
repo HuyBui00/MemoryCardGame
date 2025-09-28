@@ -20,7 +20,7 @@ export default function Man1() {
   const [flippedCards, setFlippedCards] = useState<number[]>([]);
   const [win, setWin] = useState(false);
   const [moves, setMoves] = useState(0);
-  const { speakWrong, playFlip, speakCorrect } = useSound();
+  const { playFlip } = useSound();
 
   const handleFlip = (id: number) => {
     if (flippedCards.length === 0) {
@@ -44,7 +44,6 @@ export default function Man1() {
         const secondCard = prevCards.find((c) => c.id === second);
 
         if (firstCard && secondCard && firstCard.icon === secondCard.icon) {
-          speakCorrect();
           // ✅ giống nhau → matched
           return prevCards.map((card) =>
             card.id === first || card.id === second
@@ -52,7 +51,6 @@ export default function Man1() {
               : card
           );
         } else {
-          speakWrong();
           // ❌ khác nhau → úp lại sau 1s
           setTimeout(() => {
             setCards((prev) =>
